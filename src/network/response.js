@@ -1,14 +1,18 @@
+const HttpStatus = require("http-status-codes");
+
 class ApiResponse {
-  constructor(success, message) {
+  constructor(success, body) {
     this.success = success;
-    this.message = message;
+    this.body = body;
   }
 }
 
 exports.success = function(req, res, message, status) {
-  res.status(status || 200).send(new ApiResponse(true, message));
+  res.status(status || HttpStatus.OK).send(new ApiResponse(true, message));
 };
 
 exports.error = function(req, res, message, status) {
-  res.status(status || 500).send(new ApiResponse(false, message));
+  res
+    .status(status || HttpStatus.INTERNAL_SERVER_ERROR)
+    .send(new ApiResponse(false, message));
 };
