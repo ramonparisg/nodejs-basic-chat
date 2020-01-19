@@ -5,7 +5,9 @@ const controller = require("../controllers/messageController");
 const HttpStatus = require("http-status-codes");
 
 router.get("/", function(req, res) {
-  response.success(req, res, "Lista de datos");
+  controller.findAllMessages().then(data => {
+    response.success(req, res, data, HttpStatus.OK);
+  });
 });
 
 router.post("/", function(req, res) {
