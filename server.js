@@ -36,6 +36,8 @@ router.delete("/hello-world", function(req, res) {
   response.success(req, res, "Deleted successfully");
 });
 
+app.use("/app", express.static("public"));
+
 app.listen(3000, () => {
   console.log("The app is running at port http://localhost:3000 🚀");
 });
