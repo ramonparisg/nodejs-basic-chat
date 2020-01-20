@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const router = require("./network/routes");
+
 const app = express();
 
 app.use("/app", express.static("public"));
