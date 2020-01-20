@@ -9,7 +9,7 @@ db.connect(process.env.DB_CONNECTION, {
 
 const add = fullMessage => {
   const myMessage = new model(fullMessage);
-  myMessage.save();
+  return myMessage.save();
 };
 
 const findAll = async () => {

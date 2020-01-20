@@ -5,7 +5,7 @@ const messageSchema = new Schema({
   user: String,
   message: {
     type: String,
-    required: true
+    required: [true, "Message required"]
   },
   date: Date
 });
