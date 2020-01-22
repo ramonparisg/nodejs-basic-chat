@@ -19,9 +19,9 @@ const addMessage = (user, message) => {
   });
 };
 
-const findAllMessages = () => {
+const findAllMessages = user => {
   return new Promise(resolve => {
-    resolve(store.findAll());
+    resolve(store.findAll(user));
   });
 };
 

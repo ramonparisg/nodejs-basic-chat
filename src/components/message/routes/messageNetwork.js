@@ -5,7 +5,7 @@ const controller = require("../controllers/messageController");
 const HttpStatus = require("http-status-codes");
 
 router.get("/", function(req, res) {
-  controller.findAllMessages().then(data => {
+  controller.findAllMessages(req.query.user).then(data => {
     response.success(req, res, data, HttpStatus.OK);
   });
 });
