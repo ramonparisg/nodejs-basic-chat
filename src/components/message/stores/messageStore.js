@@ -1,5 +1,5 @@
 const db = require("mongoose");
-const model = require("../models/Message");
+const Model = require("../models/Message");
 
 db.Promise = global.Promise;
 db.connect(process.env.DB_CONNECTION, {
@@ -8,15 +8,22 @@ db.connect(process.env.DB_CONNECTION, {
 }).then(() => console.log("[db] DB connected successfully"));
 
 const add = fullMessage => {
-  const myMessage = new model(fullMessage);
+  const myMessage = new Model(fullMessage);
   return myMessage.save();
 };
 
 const findAll = async () => {
-  return await model.find();
+  return await Model.find();
+};
+
+const update = async (id, message) => {
+  const documentMessage = await Model.findById(id);
+  documentMessage.message = message;
+  return await documentMessage.save();
 };
 
 module.exports = {
   add,
-  findAll: findAll
+  findAll: findAll,
+  update
 };

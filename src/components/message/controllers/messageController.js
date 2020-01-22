@@ -25,7 +25,21 @@ const findAllMessages = () => {
   });
 };
 
+const updateMessage = (id, message) => {
+  return new Promise((resolve, reject) => {
+    store
+      .update(id, message)
+      .then(result => {
+        resolve(result);
+      })
+      .catch(e => {
+        reject(e);
+      });
+  });
+};
+
 module.exports = {
   addMessage,
-  findAllMessages
+  findAllMessages,
+  updateMessage
 };
