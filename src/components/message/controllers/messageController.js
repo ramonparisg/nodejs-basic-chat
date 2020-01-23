@@ -38,8 +38,22 @@ const updateMessage = (id, message) => {
   });
 };
 
+const removeMessage = id => {
+  return new Promise((resolve, reject) => {
+    store
+      .remove(id)
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        reject(e);
+      });
+  });
+};
+
 module.exports = {
   addMessage,
   findAllMessages,
-  updateMessage
+  updateMessage,
+  removeMessage
 };

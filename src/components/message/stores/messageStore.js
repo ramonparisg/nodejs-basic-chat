@@ -26,8 +26,13 @@ const update = async (id, message) => {
   return await documentMessage.save();
 };
 
+const remove = async id => {
+  return await Model.findByIdAndDelete(id);
+};
+
 module.exports = {
   add,
   findAll: findAll,
-  update
+  update,
+  remove
 };

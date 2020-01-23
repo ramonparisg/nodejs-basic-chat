@@ -38,4 +38,15 @@ router.patch("/:id", function(req, res) {
     });
 });
 
+router.delete("/:id", function(req, res) {
+  controller
+    .removeMessage(req.params.id)
+    .then(data => {
+      response.success(req, res, data);
+    })
+    .catch(e => {
+      response.error(req, res, e);
+    });
+});
+
 module.exports = router;
