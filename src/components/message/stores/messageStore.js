@@ -6,12 +6,24 @@ const add = fullMessage => {
   return myMessage.save();
 };
 
-const findAll = async user => {
-  let userFilter = {};
-  if (user) {
-    userFilter.user = new RegExp(user, "i");
-  }
-  return await Model.find(userFilter);
+const findAll = user => {
+  return new Promise((resolve, reject) => {
+    let userFilter = {};
+    if (user) {
+      userFilter.user = new RegExp(user, "i");
+    }
+
+    Model.find(userFilter)
+      .populate("user")
+      .exec((err, data) => {
+        if (err) {
+          reject(err);
+          return false;
+        }
+
+        resolve(data);
+      });
+  });
 };
 
 const update = async (id, message) => {

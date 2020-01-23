@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const messageSchema = new Schema({
-  user: String,
+  user: {
+    type: Schema.ObjectId,
+    ref: "Users"
+  },
   message: {
     type: String,
     required: [true, "Message required"]

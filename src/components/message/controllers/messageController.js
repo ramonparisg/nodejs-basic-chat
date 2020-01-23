@@ -20,8 +20,11 @@ const addMessage = (user, message) => {
 };
 
 const findAllMessages = user => {
-  return new Promise(resolve => {
-    resolve(store.findAll(user));
+  return new Promise((resolve, reject) => {
+    store
+      .findAll(user)
+      .then(data => resolve(data))
+      .catch(e => reject(e));
   });
 };
 
