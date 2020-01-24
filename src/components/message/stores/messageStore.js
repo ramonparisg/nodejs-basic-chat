@@ -18,7 +18,12 @@ const findAll = (user, chat) => {
 
     Model.find(filter)
       .populate("user")
-      .populate("chat")
+      .populate({
+        path: "chat",
+        populate: {
+          path: "users"
+        }
+      })
       .exec((err, data) => {
         if (err) {
           reject(err);

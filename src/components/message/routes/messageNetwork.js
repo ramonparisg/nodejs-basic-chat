@@ -1,8 +1,13 @@
 const express = require("express");
-const router = express.Router();
+
 const response = require("../../../network/response");
 const controller = require("../controllers/messageController");
 const HttpStatus = require("http-status-codes");
+
+const multer = require("multer");
+
+const upload = multer({ dest: "uploads/" });
+const router = express.Router();
 
 router.get("/", function(req, res) {
   controller
@@ -13,7 +18,7 @@ router.get("/", function(req, res) {
     .catch(e => response.error(req, res, e));
 });
 
-router.post("/", function(req, res) {
+router.post("/", upload.single("file"), function(req, res) {
   const { body } = req;
   controller
     .addMessage(body.user, body.message, body.chat)
