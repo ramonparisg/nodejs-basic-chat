@@ -1,12 +1,18 @@
 const store = require("../stores/messageStore");
 
-const addMessage = (user, message, chat) => {
+const addMessage = (user, message, chat, file) => {
   return new Promise((resolve, reject) => {
+    let fileUrl = "";
+    if (file) {
+      fileUrl = process.env.PATH_TO_UPLOAD + file.filename;
+    }
+
     const fullMessage = {
       user: user,
       message: message,
       date: new Date(),
-      chat: chat
+      chat: chat,
+      file: fileUrl
     };
 
     store
