@@ -6,7 +6,7 @@ const HttpStatus = require("http-status-codes");
 
 router.get("/", function(req, res) {
   controller
-    .findAllMessages(req.query.user)
+    .findAllMessages(req.query.user, req.query.chat)
     .then(data => {
       response.success(req, res, data, HttpStatus.OK);
     })
@@ -16,7 +16,7 @@ router.get("/", function(req, res) {
 router.post("/", function(req, res) {
   const { body } = req;
   controller
-    .addMessage(body.user, body.message)
+    .addMessage(body.user, body.message, body.chat)
     .then(data => {
       response.success(
         req,

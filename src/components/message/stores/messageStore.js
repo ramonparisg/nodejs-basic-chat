@@ -1,4 +1,3 @@
-const db = require("mongoose");
 const Model = require("../models/Message");
 
 const add = fullMessage => {
@@ -6,15 +5,20 @@ const add = fullMessage => {
   return myMessage.save();
 };
 
-const findAll = user => {
+const findAll = (user, chat) => {
   return new Promise((resolve, reject) => {
-    let userFilter = {};
+    let filter = {};
     if (user) {
-      userFilter.user = new RegExp(user, "i");
+      filter.user = user;
     }
 
-    Model.find(userFilter)
+    if (chat) {
+      filter.chat = chat;
+    }
+
+    Model.find(filter)
       .populate("user")
+      .populate("chat")
       .exec((err, data) => {
         if (err) {
           reject(err);
@@ -29,11 +33,11 @@ const findAll = user => {
 const update = async (id, message) => {
   const documentMessage = await Model.findById(id);
   documentMessage.message = message;
-  return await documentMessage.save();
+  return documentMessage.save();
 };
 
-const remove = async id => {
-  return await Model.findByIdAndDelete(id);
+const remove = id => {
+  return Model.findByIdAndDelete(id);
 };
 
 module.exports = {

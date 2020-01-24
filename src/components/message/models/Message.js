@@ -6,6 +6,10 @@ const messageSchema = new Schema({
     type: Schema.ObjectId,
     ref: "Users"
   },
+  chat: {
+    type: Schema.ObjectId,
+    ref: "Chats"
+  },
   message: {
     type: String,
     required: [true, "Message required"]

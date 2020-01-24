@@ -1,12 +1,7 @@
 const store = require("../stores/chatStore");
 
 function addChat(chat) {
-  return new Promise((resolve, reject) => {
-    store
-      .add(chat)
-      .then(data => resolve(data))
-      .catch(e => reject(e));
-  });
+  return store.add(chat);
 }
 
 function listChats() {
